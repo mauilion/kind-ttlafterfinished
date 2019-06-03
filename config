@@ -1,0 +1,16 @@
+kind: Cluster
+apiVersion: kind.sigs.k8s.io/v1alpha3
+networking:
+  podSubnet: "10.244.0.0/16"
+  disableDefaultCNI: True
+nodes:
+- role: control-plane
+kubeadmConfigPatches:
+- |
+  apiVersion: kubeadm.k8s.io/v1beta1
+  kind: ClusterConfiguration
+  metadata:
+    name: config
+  controllerManager:
+    extraArgs:
+      feature-gates: TTLAfterFinished=true
